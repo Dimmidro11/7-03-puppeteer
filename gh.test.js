@@ -2,7 +2,6 @@ let page;
 
 beforeEach(async () => {
   page = await browser.newPage();
-  await page.goto("https://github.com/team");
 });
 
 afterEach(() => {
@@ -10,6 +9,11 @@ afterEach(() => {
 });
 
 describe("Github page tests", () => {
+  
+  beforeEach(async () => {
+    await page.goto("https://github.com/team");
+  });
+
   test("The h1 header content'", async () => {
     page.setDefaultTimeout(60000);
     const firstLink = await page.$("header div div a");
@@ -35,3 +39,24 @@ describe("Github page tests", () => {
     expect(actual).toMatch(/^Get started with Team$/)
   });
 });
+
+  test("The h1 header content'", async () => {
+    page.setDefaultTimeout(5000);
+    await page.goto("https://github.com/resources/articles/ai");
+    const title = await page.title();
+    expect(title).toEqual('AI · GitHub');
+  });
+
+    test("The h1 header content'", async () => {
+        page.setDefaultTimeout(5000);
+    await page.goto("https://github.com/enterprise");
+    const title = await page.title();
+    expect(title).toEqual('The AI Powered Developer Platform. · GitHub');
+  });
+
+    test("The h1 header content'", async () => {
+        page.setDefaultTimeout(5000);
+    await page.goto("https://github.com/solutions/use-case/devsecops");
+    const title = await page.title();
+    expect(title).toEqual('Unified DevSecOps Solutions Built for Security | GitHub · GitHub');
+  });
